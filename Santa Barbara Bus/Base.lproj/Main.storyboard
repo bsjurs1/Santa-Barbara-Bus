@@ -34,6 +34,9 @@
                                     <constraint firstAttribute="width" constant="109" id="RUK-Fx-Ayf"/>
                                 </constraints>
                                 <state key="normal" title="Find departures"/>
+                                <connections>
+                                    <action selector="findDepartures:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lRY-qp-lAg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,6 +49,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q6I-nR-2GQ"/>
+                    <connections>
+                        <outlet property="busstopTextField" destination="B4Q-Qr-wrN" id="8o0-Kk-8bO"/>
+                        <outlet property="findDeparturesButton" destination="0uO-0R-DvF" id="SXd-uf-moV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
