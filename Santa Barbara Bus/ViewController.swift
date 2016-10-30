@@ -26,6 +26,8 @@ class ViewController: UIViewController {
     
     @IBAction func findDepartures(_ sender: UIButton) {
         
+        
+        
     }
     
 
