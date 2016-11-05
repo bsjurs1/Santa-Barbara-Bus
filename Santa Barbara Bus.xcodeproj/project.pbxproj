@@ -14,6 +14,8 @@
 		9108D5001DC59A8200EF6250 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9108D4FF1DC59A8200EF6250 /* Assets.xcassets */; };
 		9108D5031DC59A8200EF6250 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9108D5011DC59A8200EF6250 /* LaunchScreen.storyboard */; };
 		9108D50B1DC59D0D00EF6250 /* BusDeparturesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9108D50A1DC59D0D00EF6250 /* BusDeparturesTableViewController.swift */; };
+		9108D50D1DC5A2CF00EF6250 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9108D50C1DC5A2CF00EF6250 /* NetworkManager.swift */; };
+		9108D50F1DC5CBCA00EF6250 /* HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9108D50E1DC5CBCA00EF6250 /* HTML.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		9108D5021DC59A8200EF6250 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9108D5041DC59A8200EF6250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9108D50A1DC59D0D00EF6250 /* BusDeparturesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusDeparturesTableViewController.swift; sourceTree = "<group>"; };
+		9108D50C1DC5A2CF00EF6250 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		9108D50E1DC5CBCA00EF6250 /* HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTML.swift; path = ../HTML.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +62,11 @@
 		9108D4F41DC59A8200EF6250 /* Santa Barbara Bus */ = {
 			isa = PBXGroup;
 			children = (
+				9108D50E1DC5CBCA00EF6250 /* HTML.swift */,
 				9108D4F51DC59A8200EF6250 /* AppDelegate.swift */,
 				9108D4F71DC59A8200EF6250 /* ViewController.swift */,
 				9108D4F91DC59A8200EF6250 /* Main.storyboard */,
+				9108D50C1DC5A2CF00EF6250 /* NetworkManager.swift */,
 				9108D50A1DC59D0D00EF6250 /* BusDeparturesTableViewController.swift */,
 				9108D4FF1DC59A8200EF6250 /* Assets.xcassets */,
 				9108D5011DC59A8200EF6250 /* LaunchScreen.storyboard */,
@@ -145,6 +151,8 @@
 			files = (
 				9108D4FE1DC59A8200EF6250 /* Santa_Barbara_Bus.xcdatamodeld in Sources */,
 				9108D50B1DC59D0D00EF6250 /* BusDeparturesTableViewController.swift in Sources */,
+				9108D50D1DC5A2CF00EF6250 /* NetworkManager.swift in Sources */,
+				9108D50F1DC5CBCA00EF6250 /* HTML.swift in Sources */,
 				9108D4F81DC59A8200EF6250 /* ViewController.swift in Sources */,
 				9108D4F61DC59A8200EF6250 /* AppDelegate.swift in Sources */,
 			);
@@ -308,6 +316,7 @@
 				9108D5091DC59A8200EF6250 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

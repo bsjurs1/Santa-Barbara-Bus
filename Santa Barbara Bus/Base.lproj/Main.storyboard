@@ -59,10 +59,10 @@
             </objects>
             <point key="canvasLocation" x="860" y="138.98050974512745"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Bus Departures Table View Controller-->
         <scene sceneID="PEU-Jz-Dk9">
             <objects>
-                <tableViewController id="m4I-fP-blP" sceneMemberID="viewController">
+                <tableViewController id="m4I-fP-blP" customClass="BusDeparturesTableViewController" customModule="Santa_Barbara_Bus" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VgK-lF-OPn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,6 +82,17 @@
                             <outlet property="delegate" destination="m4I-fP-blP" id="H1Z-bT-Qvq"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="rbR-3M-Mm8">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Rg1-Mx-6j3">
+                            <rect key="frame" x="19" y="6" width="337" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Camino Real Marketplace"/>
+                                <segment title="Transit Center"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npA-al-eQB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
