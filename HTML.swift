@@ -158,16 +158,23 @@ class HTML {
     
     public func a() -> [HTML]? {
         
-        let openingTagOpt1 = "a href"
-        let openingTagOpt2 = "a id"
+        let openingTagOptions = ["a href", "a id", "a class"]
         let closingTag = "</\(HTMLTag.a.rawValue)>"
+        
+        return findHTMLTagLines(openingTagOptions: openingTagOptions, closingTag: closingTag)
+    }
+    
+    public func abbr() -> [HTML]? {
+        
+        let openingTagOpt1 = "<\(HTMLTag.abbr.rawValue)"
+        let closingTag = "</\(HTMLTag.abbr.rawValue)>"
         
         var openingTagLineIndeces = Array<Int>()
         var closingTagLineIndeces = Array<Int>()
         
         //Find all relevant line indeces containing the tag of interest
         for i in 0..<document.count {
-            if document[i].contains(openingTagOpt1) || document[i].contains(openingTagOpt2){
+            if document[i].contains(openingTagOpt1){
                 openingTagLineIndeces.append(i)
             }
             if document[i].contains(closingTag){
@@ -241,7 +248,6 @@ class HTML {
         }
         
         return trimmedHTMLSnippets
-        
     }
     
     public func findByTag(tag : HTMLTag) -> [String] {
@@ -274,5 +280,98 @@ class HTML {
     public func findByType(fileType : FileType)-> [String]{
         return [""]
     }
+    
+    private func line(_ line : String, contains elements : [String]) -> Bool {
+        for element in elements {
+            if line.contains(element){
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func findHTMLTagLines(openingTagOptions : [String], closingTag : String)->[HTML]?{
+        
+        var openingTagLineIndeces = Array<Int>()
+        var closingTagLineIndeces = Array<Int>()
+        
+        //Find all relevant line indeces containing the tag of interest
+        for i in 0..<document.count {
+            if line(document[i], contains: openingTagOptions) {
+                openingTagLineIndeces.append(i)
+            }
+            if document[i].contains(closingTag){
+                closingTagLineIndeces.append(i)
+            }
+        }
+        
+        var HTMLSnippets = Array<HTML>()
+        
+        //Group together relevant HTML
+        while !closingTagLineIndeces.isEmpty {
+            
+            //Take front element of closing tag
+            let frontClosingTagLineIndex = closingTagLineIndeces.removeFirst()
+            
+            //Init this to a guaranteed valid value
+            var nearestPrecedingOpeningTagLineIndex = openingTagLineIndeces.first
+            var openingTagLineIndexToRemove = 0
+            
+            //Set value high so it starts in a valid state
+            var indexDifference = 100000
+            
+            //Find the preceding opening tag line element that is nearest
+            for i in 0..<openingTagLineIndeces.count{
+                //If the opening tag line index size exceeds the closing tag line index, then remove the previous element and end search
+                if openingTagLineIndeces[i] > frontClosingTagLineIndex {
+                    break
+                }
+                else if (frontClosingTagLineIndex - i) <= indexDifference {
+                    indexDifference = frontClosingTagLineIndex - openingTagLineIndeces[i]
+                    nearestPrecedingOpeningTagLineIndex = openingTagLineIndeces[i]
+                    openingTagLineIndexToRemove = i
+                }
+            }
+            
+            //Remove nearest preceding opening tag
+            openingTagLineIndeces.remove(at: openingTagLineIndexToRemove)
+            
+            var linesInHTMLSnippet = Array<String>()
+            //Make an html snippet
+            if nearestPrecedingOpeningTagLineIndex != nil {
+                for i in nearestPrecedingOpeningTagLineIndex!...frontClosingTagLineIndex {
+                    let line = document[i].trimmingCharacters(in: .whitespaces)
+                    linesInHTMLSnippet.append(line)
+                }
+            }
+            else {
+                print("nearestPrecedingOpeningTagLineIndex was nil")
+                return nil
+            }
+            
+            let HTMLSnippet = HTML(document: linesInHTMLSnippet)
+            
+            HTMLSnippets.append(HTMLSnippet)
+            
+        }
+        
+        //Trim the HTMLSnippets
+        var trimmedHTMLSnippets = Array<HTML>()
+        for HTMLSnippet in HTMLSnippets {
+            for line in HTMLSnippet.document {
+                //See if there are more than one a in the line of interest
+                for line in line.components(separatedBy: "<a") {
+                    if line.contains("</a>") {
+                        let relevantLinePart = "<a\(line)"
+                        let backTrimmedRelevantLinePart = relevantLinePart.components(separatedBy: "</a>")[0]
+                        trimmedHTMLSnippets.append(HTML(rawDocument: "\(backTrimmedRelevantLinePart)</a>"))
+                    }
+                }
+            }
+        }
+        
+        return trimmedHTMLSnippets
+    }
+
     
 }
