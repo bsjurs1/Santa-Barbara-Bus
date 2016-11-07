@@ -19,24 +19,15 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        
         let sbmtdBusInfoUrl = URL(string: "http://sbmtd.gov/business-and-employment/purchasing.html")
         
         do{
             let myHTMLString = try String(contentsOf: sbmtdBusInfoUrl!, encoding: .ascii)
             let myHTMLDoc = HTML(rawDocument: myHTMLString)
            
-            let HTMLAs = myHTMLDoc.a()!
-            
-            for elem in HTMLAs {
-                for line in elem.document {
-                    print(line)
-                }
-            }
-            
-            print(HTMLAs.count)
-            
-            
+            let HTMLAs = myHTMLDoc.parse(tag: .script)
+
+            print(HTMLAs)
         }
         catch let error {
             print("Error: \(error)")
