@@ -160,10 +160,6 @@ class HTML {
     
     //Functions
     
-    public func findByTag(tag : HTMLTag) -> [String] {
-        return [""]
-    }
-    
     public func findByClass(htmlClass : String) -> [String]{
         return [""]
     }
@@ -176,7 +172,6 @@ class HTML {
         return [""]
     }
     
-    //Seem to fail at elements stretching over multiple lines
     public func parse(tag : HTMLTag) -> [HTML] {
         
         var openingTagLineIndeces = Array<Int>()
@@ -184,7 +179,7 @@ class HTML {
         let closingTag = "</\(tag.rawValue)>"
         let openingTag = "<\(tag.rawValue)"
         
-        //Find all relevant line indeces containing the tag of interest
+        //Find all relevant line indices containing the tag of interest
         for i in 0..<document.count {
             if document[i].contains(openingTag) {
                 openingTagLineIndeces.append(i)
@@ -196,21 +191,22 @@ class HTML {
         
         var HTMLSnippets = Array<HTML>()
         
-        //Group together relevant HTML
+        //Group together relevant HTML snippets based on the discovered indices
         while !closingTagLineIndeces.isEmpty {
             
-            //Take front element of closing tag
+            //Take first element of closing tag array (first closing tag appearing in the HTML document)
             let frontClosingTagLineIndex = closingTagLineIndeces.removeFirst()
             
-            //Init this to a guaranteed valid value
+            //Init the closest preceding opening tag to a valid state (The first opening tag in the document)
             var nearestPrecedingOpeningTagLineIndex = openingTagLineIndeces.first
             var openingTagLineIndexToRemove = 0
-            //Set value high so it starts in a valid state
+            
+            //Use this to keep track of which tags are closest together
             var indexDifference = 100000
             
             //Find the preceding opening tag line element that is nearest
             for i in 0..<openingTagLineIndeces.count {
-                //If the opening tag line index size exceeds the closing tag line index, then remove the previous element and end search
+                //If the opening tag line index size exceeds the closing tag line index then end search
                 if openingTagLineIndeces[i] > frontClosingTagLineIndex {
                     break
                 }
@@ -242,7 +238,7 @@ class HTML {
             HTMLSnippets.append(HTMLSnippet)
         }
         
-        
+        //Trim the found HTML snippets to remove text preceding the opening tag and textexceeding the closing tag
         var trimmedHTMLSnippets = Array<HTML>()
         for HTMLSnippet in HTMLSnippets {
             var multiLineHTMLElement = Array<String>()
